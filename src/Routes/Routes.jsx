@@ -19,7 +19,8 @@ const myCreatedRoutes = createBrowserRouter([
             },
             {
                 path: "/post-job",
-                element: <PrivateRoutes><PostJob></PostJob></PrivateRoutes>
+                element: <PrivateRoutes><PostJob></PostJob></PrivateRoutes>,
+                loader:()=> fetch("http://localhost:5000/api/v1/category")
             },
             {
                 path: "/login",
