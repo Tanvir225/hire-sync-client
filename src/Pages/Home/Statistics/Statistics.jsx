@@ -2,7 +2,7 @@
 
 const Statistics = () => {
     return (
-        <div className="bg-blue-600 space-y-10 p-10 text-white  bg-opacity-85">
+        <div className="bg-blue-600 space-y-10 p-10 text-white  bg-opacity-80">
             <h2 className="text-center text-4xl">Careers Statistics
             </h2>
             <p className="text-center text-xl w-full lg:w-[55%] mx-auto">Explore endless career opportunities, where talent meets opportunity. Discover curated job listings, connect with top employers, and take the next step in your professional journey. </p>

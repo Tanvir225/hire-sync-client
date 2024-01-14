@@ -57,7 +57,7 @@ const Signup = () => {
 
 
   return (
-    <div className="bg-base-100 h-screen flex flex-col justify-center items-center bg-opacity-95">
+    <div className="bg-base-100 h-screen flex flex-col justify-center items-center bg-opacity-90">
       {/* helmet provider */}
       <Helmet>
         <title>Hire Sync | Signup</title>

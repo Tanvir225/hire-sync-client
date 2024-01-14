@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
   },[])
 
   //authObj
-  const authObj = { createUser,user,loginUser,logOut,googleLogin };
+  const authObj = { createUser,user,loginUser,logOut,googleLogin,loading };
 
   return (
     <AuthContext.Provider value={authObj}>{children}</AuthContext.Provider>

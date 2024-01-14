@@ -44,20 +44,20 @@ const Navbar = () => {
   const privateLinks = (
     <>
       <li>
-        <Link className="btn  text-white text-center btn-outline mr-6 hidden md:flex">
+        <NavLink to={"/post-job"} className="btn text-white text-center btn-outline mr-6 hidden md:flex">
           <AiOutlineFileAdd className="text-2xl"></AiOutlineFileAdd> Post a job
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link className="btn text-white text-center btn-outline mr-6 hidden md:flex">
+        <NavLink className="btn text-white text-center btn-outline mr-6 hidden md:flex">
           <AiOutlineAreaChart className="text-2xl"></AiOutlineAreaChart> Applied
           Jobs
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link className="btn text-white text-center btn-outline mr-6 hidden md:flex">
+        <NavLink className="btn text-white text-center btn-outline mr-6 hidden md:flex">
           <AiOutlineFileSync className="text-2xl"></AiOutlineFileSync> My Jobs
-        </Link>
+        </NavLink>
       </li>
     </>
   );
