@@ -55,7 +55,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="btn text-white text-center btn-outline mr-6 hidden md:flex">
+        <NavLink to={"/my-jobs"} className="btn text-white text-center btn-outline mr-6 hidden md:flex">
           <AiOutlineFileSync className="text-2xl"></AiOutlineFileSync> My Jobs
         </NavLink>
       </li>
