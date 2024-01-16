@@ -19,15 +19,13 @@ const AllJob = () => {
 
   //tenstackquery for get
   const { data, isLoading } = useQuery({
-    queryKey: ["allJobs", user?.email],
+    queryKey: ["allJobs", user?.email,search],
     queryFn: async () => {
-      return await axios.get(`/jobs/exclude?email=${user?.email}`);
+      return await axios.get(`/jobs/exclude?email=${user?.email}&search=${search}`);
     },
   });
 
-  if (isLoading) {
-        return spinner
-  }
+
 
   return (
     <div className="bg-base-100 bg-opacity-80 h-screen">
@@ -53,9 +51,9 @@ const AllJob = () => {
         </div>
       </div>
 
-      <div>
+      <div className="container mx-auto p-5">
         {
-            isLoading ? spinner : <div>
+            isLoading ? spinner : <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {
                     data?.data?.map(job => <AllJobCard key={job._id} job={job}></AllJobCard>)
                 }
