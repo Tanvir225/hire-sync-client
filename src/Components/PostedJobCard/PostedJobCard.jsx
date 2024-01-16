@@ -36,7 +36,7 @@ const PostedJobCard = ({ job }) => {
       })
         .then((willDelete) => {
           if (willDelete) {
-            swal("Poof! Your imaginary file has been deleted!", {
+            swal("Your job has been deleted!", {
               icon: "success",
             });
             queryClient.invalidateQueries({queryKey:["jobs"]})

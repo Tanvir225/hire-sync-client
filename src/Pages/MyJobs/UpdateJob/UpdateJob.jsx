@@ -1,56 +1,70 @@
 import { Helmet } from "react-helmet-async";
 import postBanner from "../../../assets/images/postBanner.jpg"
-import { useEffect, useState } from "react";
-
 import Banner from "../../../Components/Header/Banner/Banner";
 import PostForm from "../../../Components/PostForm/PostForm";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import useAxios from "../../../Hook/useAxios";
-import { useParams } from "react-router-dom";
+
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const UpdateJob = () => {
 
     //useparams
-    const { id } = useParams()
-    //console.log(id);
+    const {id} = useParams()
+  
 
     //state
-    const [categories, setCategories] = useState()
+  
     const [appDeadline, setappDeadline] = useState(new Date());
     const [category, setCategory] = useState("");
-    const [title, setTitle] = useState("");
-    const [photo, setPhoto] = useState("");
-    const [salary, setSalary] = useState("");
-    const [keyword, setKeyword] = useState("");
-    const [description, setDescription] = useState("");
-    const [exp, setExp] = useState(0);
+    const [title, setTitle] = useState('');
+    const [photo, setPhoto] = useState('');
+    const [salary, setSalary] = useState('');
+    const [keyword, setKeyword] = useState('');
+    const [description, setDescription] = useState('');
+    const [exp, setExp] = useState();
     const [name, setName] = useState('');
+    const [vacancy, setVacancy] = useState();
+
+    //useNavigate
+    const navigate = useNavigate()
 
     //useAxios hook
     const axios = useAxios()
 
-    //testack userQuery 
-    const { data } = useQuery({
-        queryKey: ["jobs"],
-        queryFn: async () => {
-            return await axios.get("/category")
-        }
-    })
     useEffect(()=>{
-        setCategories(data?.data)
-    },[data?.data])
-   
-    //tenstack query mutation
+        axios.get(`jobs/${id}`)
+        .then((res) => {
+            const {title,photo,salary,keyword,description,exp,name} = res?.data || {}
+            setTitle(title)
+            setPhoto(photo)
+            setSalary(salary)
+            setKeyword(keyword)
+            setDescription(description)
+            setExp(exp)
+            setName(name)
+            setVacancy(vacancy)
+        })
+    },[])
+  
+
+    //tenstack query mutation -> update
     const { mutate } = useMutation({
         mutationKey: ["jobs"],
         mutationFn: async (job) => {
             return await axios.patch(`/jobs/update/${id}`, job)
+        },
+        onSuccess:()=>{
+            toast.success("job hase been updated")
+            navigate("/my-jobs")
         }
     })
 
  
 
-    console.log(data?.data);
+  
     return (
         <div className="h-screen bg-base-100 bg-opacity-70">
             {/* helmet */}
@@ -76,7 +90,6 @@ const UpdateJob = () => {
                     setKeyword={setKeyword}
                     description={description}
                     setDescription={setDescription}
-                    categories={categories}
                     category={category}
                     setCategory={setCategory}
                     mutate={mutate}
@@ -85,8 +98,9 @@ const UpdateJob = () => {
                     exp={exp}
                     setExp={setExp}
                     salary={salary}
-                    setSalary={setSalary
-                    }
+                    setSalary={setSalary}
+                    vacancy={vacancy}
+                    setVacancy={setVacancy}
                 ></PostForm>
             </div>
         </div>

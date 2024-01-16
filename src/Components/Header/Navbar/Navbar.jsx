@@ -29,7 +29,7 @@ const Navbar = () => {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/jobs"}>All Jobs</NavLink>
+        <NavLink to={"/all-jobs"}>All Jobs</NavLink>
       </li>
       <li>
         <NavLink to={"/blogs"}>Blogs</NavLink>
@@ -64,7 +64,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar lg:px-10 bg-blue-700 text-white bg-opacity-95 py-3">
+      <div className="navbar  lg:px-10 bg-blue-700 text-white bg-opacity-95 py-3">
         <div className="justify-start w-[40%]">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -90,14 +90,14 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <div className="btn btn-ghost font-semibold text-2xl">
+          <Link to={"/"} className="btn btn-ghost font-semibold text-2xl">
             <img
               src={logo}
               className="w-12 hidden md:block  object-cover  rounded-full"
               alt="logo"
             />
             <p>Hire-Sync</p>
-          </div>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-5">{links}</ul>

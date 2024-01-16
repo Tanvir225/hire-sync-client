@@ -2,11 +2,11 @@ import { useState } from "react";
 import Banner from "../../Components/Header/Banner/Banner";
 import postBanner from "../../assets/images/postBanner.jpg";
 import { Helmet } from "react-helmet-async";
-import { useLoaderData, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import useAxios from "../../Hook/useAxios";
 import toast from "react-hot-toast";
 import PostForm from "../../Components/PostForm/PostForm";
+import { useNavigate } from "react-router-dom";
 
 const PostJob = () => {
   //state
@@ -19,12 +19,10 @@ const PostJob = () => {
   const [description, setDescription] = useState("");
   const [exp, setExp] = useState(0);
   const [name, setName] = useState('');
+  const[vacancy,setVacancy] = useState(0)
 
 
 
-  //loader data
-  const categories = useLoaderData();
-  console.log(categories);
 
 
 
@@ -72,7 +70,6 @@ const PostJob = () => {
           setKeyword={setKeyword}
           description={description}
           setDescription={setDescription}
-          categories={categories}
           category={category}
           setCategory={setCategory}
           mutate={mutate } 
@@ -81,8 +78,9 @@ const PostJob = () => {
           exp={exp}
           setExp={setExp}
           salary={salary}
-          setSalary={setSalary
-          }
+          setSalary={setSalary}
+          vacancy={vacancy}
+          setVacancy={setVacancy}
         ></PostForm>
       </div>
     </div>
