@@ -18,4 +18,5 @@ const Banner = ({ bannerImg, text,desc }) => {
 };
 
 
+
 export default Banner;

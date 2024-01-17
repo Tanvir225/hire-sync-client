@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import signImage from "../../assets/images/signin.jpg";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { Helmet } from "react-helmet-async";
@@ -13,6 +13,11 @@ const Login = () => {
 
   //useAuth hooks
   const { loginUser, googleLogin } = useAuth();
+
+  //location & navigate
+  const location = useLocation()
+  const navigate = useNavigate()
+
 
   //handleSubmit
   const handleSubmit = (event) => {
@@ -32,6 +37,7 @@ const Login = () => {
         console.log(user);
         toast.success("User Login Successfully", { id: toastId });
         formData.reset();
+        navigate(location?.state ? location?.state : "/")
       })
       .catch((error) => {
         toast.error(error.message.slice(10, error.message.length), {
@@ -49,6 +55,7 @@ const Login = () => {
       const user = result.user;
       console.log(user);
       toast.success("User Login Successfully", { id: toastId });
+       navigate(location?.state ? location?.state : "/")
     });
   };
 

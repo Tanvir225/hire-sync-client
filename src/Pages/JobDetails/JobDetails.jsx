@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../Hook/useAxios";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ImCommand } from "react-icons/im";
 import {
   AiOutlineUser,
@@ -16,7 +16,8 @@ import toast from "react-hot-toast";
 
 const JobDetails = () => {
   //state
-  const [Alert, setAlert] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   //useParams
   const { id } = useParams();
@@ -24,6 +25,9 @@ const JobDetails = () => {
   //useAxios
   const axios = useAxios();
   const { user } = useAuth();
+
+  //navigate
+  const navigate = useNavigate()
 
   const userEmail = user?.email;
   const userName = user?.displayName;
@@ -39,6 +43,7 @@ const JobDetails = () => {
   const company = data?.data?.name;
   const category = data?.data?.category;
   const salary = data?.data?.salary;
+  const photo = data?.data?.photo;
 
   //applyDeadline convert time
 
@@ -69,6 +74,7 @@ const JobDetails = () => {
       userName,
       userEmail,
       position,
+      photo,
       resumeLink,
       id,
       company,
@@ -87,11 +93,11 @@ const JobDetails = () => {
     try{
         const userApply = await axios.post("/apply", applyJob);
         if (userApply?.data?.success) {
-            setAlert(userApply?.data?.success)
+            setSuccess(userApply?.data?.success)
         }
 
         if (userApply?.data?.error) {
-            setAlert(userApply?.data?.error)
+            setError(userApply?.data?.error)
         }
 
        
@@ -106,10 +112,15 @@ const JobDetails = () => {
   };
 
   useEffect(()=>{
-    if (Alert) {
-        toast(Alert)
+    if (error) {
+        toast.error(error)
+        navigate(-1)
     }
-  },[Alert])
+    if (success) {
+        toast.success(success)
+        navigate("/apply-job")
+    }
+  },[error,success,navigate])
 
   return (
     <div className="bg-blue-100 h-screen bg-opacity-90">
