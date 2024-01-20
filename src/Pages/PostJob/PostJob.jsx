@@ -46,7 +46,7 @@ const PostJob = () => {
 
   console.log(title);
   return (
-    <div className="h-screen bg-base-100 bg-opacity-70">
+    <div className="h-fit bg-blue-100 bg-opacity-95">
       {/* helmet */}
       <Helmet>
         <title>Hire Sync | Post Job</title>

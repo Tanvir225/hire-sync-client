@@ -123,7 +123,7 @@ const JobDetails = () => {
   },[error,success,navigate])
 
   return (
-    <div className="bg-blue-100 h-screen bg-opacity-90">
+    <div className="bg-blue-100  bg-opacity-90 h-fit">
       <div className="grid grid-cols-12  gap-5 container mx-auto p-6 lg:p-10">
         <div className="col-span-full lg:col-span-8">
           <div className="bg-base-100 flex items-center justify-between px-5 md:px-10 py-5 rounded-lg shadow-md">

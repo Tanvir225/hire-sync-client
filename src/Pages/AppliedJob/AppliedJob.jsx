@@ -32,7 +32,7 @@ const AppliedJob = () => {
     console.log(data);
 
     return (
-        <div className="bg-base-100 h-screen bg-opacity-80">
+        <div className="bg-base-100 h-fit bg-opacity-80">
             {/* helmet */}
             <Helmet>
                 <title>Hire Sync | Applied Jobs</title>

@@ -34,7 +34,7 @@ const MyJobs = () => {
   //console.log(data);
 
   return (
-    <div className="h-screen bg-base-100 bg-opacity-85">
+    <div className="h-fit bg-base-100 bg-opacity-85">
       {/* helmet */}
       <Helmet>
         <title>Hire Sync | Posted Jobs</title>

@@ -6,18 +6,19 @@ import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
+import useAxios from "../../Hook/useAxios";
 
 const Login = () => {
   //state
   const [toggle, setToggle] = useState(false);
 
-  //useAuth hooks
+  //useAuth useAxios hooks
   const { loginUser, googleLogin } = useAuth();
+  const axios = useAxios();
 
   //location & navigate
-  const location = useLocation()
-  const navigate = useNavigate()
-
+  const location = useLocation();
+  const navigate = useNavigate();
 
   //handleSubmit
   const handleSubmit = (event) => {
@@ -37,7 +38,14 @@ const Login = () => {
         console.log(user);
         toast.success("User Login Successfully", { id: toastId });
         formData.reset();
-        navigate(location?.state ? location?.state : "/")
+
+        //jwt user post
+        axios.post("/jwt", {email:user?.email}).then((res) => {
+          if (res?.data) {
+            console.log(res.data);
+            navigate(location?.state ? location?.state : "/");
+          }
+        });
       })
       .catch((error) => {
         toast.error(error.message.slice(10, error.message.length), {
@@ -55,7 +63,14 @@ const Login = () => {
       const user = result.user;
       console.log(user);
       toast.success("User Login Successfully", { id: toastId });
-       navigate(location?.state ? location?.state : "/")
+      //jwt user post
+      axios.post("/jwt",{email:  user?.email}).then((res) => {
+        if (res?.data) {
+          console.log(res.data);
+          navigate(location?.state ? location?.state : "/");
+        }
+      });
+       
     });
   };
 

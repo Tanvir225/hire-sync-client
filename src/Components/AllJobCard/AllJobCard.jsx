@@ -6,6 +6,9 @@ import {
 } from "react-icons/ai";
 import { format, formatDistance } from "date-fns";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AllJobCard = ({ job }) => {
   //destructure job
@@ -22,6 +25,16 @@ const AllJobCard = ({ job }) => {
     appDeadline
   } = job || {};
 
+
+    //useEffet for AOS
+    useEffect(() => {
+      AOS.init({
+        // Global settings
+        duration: 1000, // Animation duration
+        easing: "ease-in-out", // Easing for the animation
+      });
+    }, []);
+
   //timestamp
   const timeStamp = formatDistance(new Date(applyDate), new Date(), {
     addSuffix: true,
@@ -31,7 +44,7 @@ const AllJobCard = ({ job }) => {
   const applyDeadline = format(new Date(appDeadline), "dd-MM-YYY");
 
   return (
-    <div className="bg-base-100 shadow-lg mb-5 p-5 md:p-8 space-y-5 rounded-lg">
+    <div className="bg-base-100 shadow-lg mb-5 p-5 md:p-8 space-y-5 rounded-lg" data-aos="zoom-out">
       <div className="flex items-center justify-between">
         <div className="flex flex-1 items-center justify-between ">
           <figure className="w-24 bg-base-100 p-2 rounded-lg shadow-md">

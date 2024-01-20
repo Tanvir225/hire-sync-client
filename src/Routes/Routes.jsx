@@ -20,7 +20,8 @@ const myCreatedRoutes = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader:()=> fetch("http://localhost:5000/api/v1/category"),
             },
             {
                 path: "/post-job",
