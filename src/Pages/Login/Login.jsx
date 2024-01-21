@@ -26,7 +26,7 @@ const Login = () => {
     const formData = event.target;
     const email = formData.email.value;
     const password = formData.password.value;
-    console.log(email, password);
+  
 
     //toastId
     const toastId = toast.loading("logging in ...");
@@ -75,7 +75,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-base-100 h-screen flex flex-col justify-center items-center bg-opacity-95">
+    <div className="bg-base-100 h-fit flex flex-col justify-center items-center bg-opacity-95">
       {/* helmet provider */}
       <Helmet>
         <title>Hire Sync | Login</title>

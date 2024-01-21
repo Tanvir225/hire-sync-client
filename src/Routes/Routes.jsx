@@ -21,7 +21,7 @@ const myCreatedRoutes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader:()=> fetch("http://localhost:5000/api/v1/category"),
+                loader:()=> fetch("https://hire-sync-server-eta.vercel.app/api/v1/category"),
             },
             {
                 path: "/post-job",
@@ -36,23 +36,23 @@ const myCreatedRoutes = createBrowserRouter([
             {
                 path: "/all-jobs",
                 element: <AllJob></AllJob>,
-                loader:()=> fetch("http://localhost:5000/api/v1/category")
+                loader:()=> fetch("https://hire-sync-server-eta.vercel.app/api/v1/category")
             },
             {
                 path: "/apply-job",
                 element: <PrivateRoutes><AppliedJob></AppliedJob></PrivateRoutes>,
-                loader:()=> fetch("http://localhost:5000/api/v1/category")
+                loader:()=> fetch("https://hire-sync-server-eta.vercel.app/api/v1/category")
             },
             {
                 path: "/job/:id",
                 element: <PrivateRoutes><JobDetails></JobDetails></PrivateRoutes>,
-                loader: ({params})=> fetch(`http://localhost:5000/api/v1/jobs/${params.id}`)
+                loader: ({params})=> fetch(`https://hire-sync-server-eta.vercel.app/api/v1/jobs/${params.id}`)
 
             },
             {
                 path: "/update-job/:id",
                 element: <PrivateRoutes><UpdateJob></UpdateJob></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/api/v1/jobs/update/${params.id}`)
+                loader: ({ params }) => fetch(`https://hire-sync-server-eta.vercel.app/api/v1/jobs/update/${params.id}`)
             },
             {
                 path: "/login",

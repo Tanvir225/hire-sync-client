@@ -9,6 +9,7 @@ const Banner = ({ bannerImg, text, desc }) => {
       // Global settings
       duration: 1000, // Animation duration
       easing: "ease-in-out", // Easing for the animation
+      once:true
     });
   }, []);
 

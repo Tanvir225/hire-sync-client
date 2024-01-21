@@ -25,7 +25,7 @@ const AllJob = () => {
   const spinner = useSpinner();
 
   //get totaJob count api
-  fetch("http://localhost:5000/api/v1/jobsCount")
+  fetch("https://hire-sync-server-eta.vercel.app/api/v1/jobsCount")
     .then((res) => res.json())
     .then((data) => {
       setCount(data?.count);
@@ -80,7 +80,7 @@ const AllJob = () => {
           />
         </div>
         <div className="grid grid-cols-12 gap-5 relative">
-          <div className="col-span-full lg:col-span-3 bg-base-100 h-64 rounded-lg sticky z-10 top-0 p-5 space-y-5">
+          <div className="col-span-full lg:col-span-3 bg-base-100 h-64 rounded-lg md:sticky md:z-10 md:top-0 p-5 space-y-5">
             <p className="text-blue-500 font-semibold border-b-2 border-blue-500">
               Filter by category
             </p>

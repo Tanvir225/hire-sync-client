@@ -6,7 +6,7 @@ import "./BottomNav.css"
 const BottomNav = () => {
   return (
     <div className=" md:hidden relative">
-      <div className="fixed bottom-0 flex gap-16  items-center w-full p-6 text-white bg-blue-600 text-4xl">
+      <div className="fixed bottom-0 flex justify-between items-center w-full px-10 py-6 text-white bg-blue-600 text-4xl">
         <NavLink to={"/"}>
             <AiOutlineHome></AiOutlineHome>
             <span className="text-base">Home</span>
@@ -26,10 +26,7 @@ const BottomNav = () => {
             <AiOutlineBgColors></AiOutlineBgColors>
             <span className="text-base">My jobs</span>
         </NavLink>
-        <NavLink to={"/apply-job"}>
-            <AiOutlineAreaChart></AiOutlineAreaChart>
-            <span className="text-base">Applied jobs</span>
-        </NavLink>
+       
       
        
       </div>

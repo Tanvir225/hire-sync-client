@@ -10,17 +10,15 @@ import useAuth from "../../../Hook/useAuth";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-
   //useAuth hooks
-  const {user,logOut} = useAuth()
+  const { user, logOut } = useAuth();
 
   //handle logOut
-  const handleLogOut = ()=>{
-    logOut()
-    .then(res =>{
-      toast.success("user Logout Successfully")
-    })
-  }
+  const handleLogOut = () => {
+    logOut().then((res) => {
+      toast.success("user Logout Successfully");
+    });
+  };
 
   //links for route
   const links = (
@@ -44,18 +42,27 @@ const Navbar = () => {
   const privateLinks = (
     <>
       <li>
-        <NavLink to={"/post-job"} className="btn text-white text-center btn-outline mr-6 hidden md:flex">
+        <NavLink
+          to={"/post-job"}
+          className="btn text-white text-center btn-outline mr-6 hidden md:flex"
+        >
           <AiOutlineFileAdd className="text-2xl"></AiOutlineFileAdd> Post a job
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/apply-job"} className="btn text-white text-center btn-outline mr-6 hidden md:flex">
+        <NavLink
+          to={"/apply-job"}
+          className="btn text-white text-center btn-outline mr-6 hidden md:flex"
+        >
           <AiOutlineAreaChart className="text-2xl"></AiOutlineAreaChart> Applied
           Jobs
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/my-jobs"} className="btn text-white text-center btn-outline mr-6 hidden md:flex">
+        <NavLink
+          to={"/my-jobs"}
+          className="btn text-white text-center btn-outline mr-6 hidden md:flex"
+        >
           <AiOutlineFileSync className="text-2xl"></AiOutlineFileSync> My Jobs
         </NavLink>
       </li>
@@ -103,25 +110,49 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 space-x-5">{links}</ul>
         </div>
         <div className="justify-end w-[55%]">
-          {
-            user && <ul className="flex ">{privateLinks}</ul>
-          }
-          
-          {
-            user ?  <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img alt={`${user?.displayName} image`} src={user?.photoURL} />
+          {user && <ul className="flex ">{privateLinks}</ul>}
+
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt={`${user?.displayName} image`}
+                    src={user?.photoURL}
+                  />
+                </div>
               </div>
+              <ul
+                tabIndex={0}
+                className="mt-4 z-[1] text-black p-2 z-40 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-44 h-40"
+              >
+                <div className="flex flex-col justify-center gap-3 items-center p-2">
+                 
+                  <p className="text-blue-500 font-semibold text-base">
+                    {user?.displayName}
+                  </p>
+                  <NavLink to={"/apply-job"} className={"btn btn-outline bg-blue-500 text-white"}>
+                    <AiOutlineAreaChart></AiOutlineAreaChart>
+                    Applied jobs
+                  </NavLink>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn btn-outline btn-sm w-full text-blue-500"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </ul>
             </div>
-            <ul tabIndex={0} className="mt-4 z-[1] text-black p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-44 h-28">
-              <div className="flex flex-col justify-center gap-3 items-center p-2">
-                  <p className="text-blue-500 font-semibold text-base">{user?.displayName}</p>
-                  <button onClick={handleLogOut} className="btn btn-outline btn-sm w-full text-blue-500">Logout</button>
-              </div>
-            </ul>
-          </div> : <Link to={"/login"} className="btn btn-outline lg:w-36 text-white">Login</Link>
-          }
+          ) : (
+            <Link to={"/login"} className="btn btn-outline lg:w-36 text-white">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

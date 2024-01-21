@@ -1,63 +1,69 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import signImage from "../../assets/images/signin.jpg";
-import {AiOutlineEye,AiOutlineEyeInvisible} from "react-icons/ai"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
+import useAxios from "../../Hook/useAxios";
 
 const Signup = () => {
-
-
   //state
-  const [toggle,setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
 
+  //useAuth & useAxios hooks
+  const { createUser } = useAuth();
+  const axios = useAxios()
+  //navigate
+  const navigate = useNavigate();
 
-  //useAuth hooks
-  const {createUser} = useAuth()
-  
+  //location
+  const location = useLocation();
 
   //handleSubmit functionality
-  const handleSubmit = (event)=>{
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = event.target
-    const name = formData.name.value
-    const photo = formData.photo.value
-    const email = formData.email.value
-    const password = formData.password.value
-
+    const formData = event.target;
+    const name = formData.name.value;
+    const photo = formData.photo.value;
+    const email = formData.email.value;
+    const password = formData.password.value;
 
     //toasId
-    const toastId = toast.loading("logging in ..")
+    const toastId = toast.loading("logging in ..");
 
     //create user
-    createUser(email,password)
-    .then((res) =>{
-        const user = res.user
+    createUser(email, password)
+      .then((res) => {
+        const user = res.user;
         console.log(user);
 
         //update user
-        updateProfile(user,{
-          displayName:name,
-          photoURL:photo
-        })
-        toast.success("User crated Successfully",{id:toastId})
-        formData.reset()
-    })
-    .catch((error)=>{
-        toast.error(error.message.slice(10,error.message.length),{id:toastId})
-    })
-  }
+        updateProfile(user, {
+          displayName: name,
+          photoURL: photo,
+        });
+        toast.success("User crated Successfully", { id: toastId });
+        formData.reset();
 
-
-
-
-
-
+        //jwt user post
+        axios.post("/jwt", { email: user?.email }).then((res) => {
+          if (res?.data) {
+            console.log(res.data);
+            navigate(location?.state ? location?.state : "/");
+          }
+        });
+      })
+      .catch((error) => {
+        toast.error(error.message.slice(10, error.message.length), {
+          id: toastId,
+        });
+      });
+  };
 
   return (
-    <div className="bg-base-100 h-screen flex flex-col justify-center items-center bg-opacity-90">
+    <div className="bg-base-100 h-fit flex flex-col justify-center items-center bg-opacity-90">
       {/* helmet provider */}
       <Helmet>
         <title>Hire Sync | Signup</title>
@@ -119,14 +125,22 @@ const Signup = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type={toggle ? 'text' : 'password'}
+                  type={toggle ? "text" : "password"}
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
                   required
                 />
-                <p className="absolute top-14 right-5" onClick={()=> setToggle(!toggle)}>{ toggle ? <AiOutlineEye></AiOutlineEye> : <AiOutlineEyeInvisible></AiOutlineEyeInvisible>}</p>  
-       
+                <p
+                  className="absolute top-14 right-5"
+                  onClick={() => setToggle(!toggle)}
+                >
+                  {toggle ? (
+                    <AiOutlineEye></AiOutlineEye>
+                  ) : (
+                    <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
+                  )}
+                </p>
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-outline text-blue-600 ">

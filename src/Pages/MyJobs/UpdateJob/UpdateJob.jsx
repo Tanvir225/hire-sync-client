@@ -66,7 +66,7 @@ const UpdateJob = () => {
 
   
     return (
-        <div className="h-screen bg-base-100 bg-opacity-70">
+        <div className="h-fit bg-base-100 bg-opacity-90">
             {/* helmet */}
             <Helmet>
                 <title>Hire Sync | Update Job</title>
